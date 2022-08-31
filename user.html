@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>User.io</title>
+    </head>
+    <body>
+        <h1>User and socket.io</h1>
+        <div id="news-list"></div>
+        <h1>Driver Location</h1>
+        <div id="driver_loc"></div>
+        <!-- <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+
+
+
+        <script>
+            var socket = io('http://192.168.0.105:30011');
+            socket.on('connect',(datas)=>{console.log("the id is",+ socket.id)})
+           /* socket.on('news', function (data) {
+                var div = document.getElementById("news-list");
+                console.log("Rendering news : ",data);
+                for(var i = 0;i < data.length;i++){
+                    var newsItem = data[i];
+                    div.innerHTML += "<h3>" + newsItem.title + ' <small>'+ newsItem.date + "</small></h3><br>";
+                }
+                socket.emit('my other event', { my: 'data' });
+            });*/
+            var user_id=1;
+            socket.on('fetch_vehicle_driver_'+user_id, function (data) {
+                console.log("driver_location : ",data);
+                var div = document.getElementById("driver_loc"); //your map
+                div.innerHTML += "<h3>User Id:" + data.user_id + ' <small> Driver Lat:'+ data.lat + "</small></h3><br>";           
+                
+            });
+            // socket.on('get_nearest_driver_'+user_id, function (data) {
+            //     console.log("driver_location : ",data);
+            //     var div = document.getElementById("driver_loc"); //your map
+            //     div.innerHTML += "<h3>User Id:" + data.user_id + ' <small> Driver Lat:'+ data.lat + "</small></h3><br>";           
+                
+            // });
+            // socket.on('get_nearest_driver_'+user_id, function (data) {
+            //     console.log("drivers_list : ",data);
+            //     var div = document.getElementById("driver_loc"); //your map
+            //     div.innerHTML += "<h3>User Id:" + data.user_id + ' <small> Driver Lat:'+ data.lat + "</small></h3><br>";           
+                
+            // });
+
+        </script>
+    </body>
+</html>

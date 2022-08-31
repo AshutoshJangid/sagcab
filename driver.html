@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Driver.io</title>
+    </head>
+    <body>
+        <h1>Driver and socket.io</h1>
+        <div id="news-list"></div>
+        <!-- <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+
+
+
+        <script>
+            var socket = io('http://192.168.0.105:30011');
+
+            /*socket.on('news', function (data) {
+                var div = document.getElementById("news-list");
+                console.log("Rendering news : ",data);
+                for(var i = 0;i < data.length;i++){
+                    var newsItem = data[i];
+                    div.innerHTML += "<h3>" + newsItem.title + ' <small>'+ newsItem.date + "</small></h3><br>";
+                }
+                socket.emit('my other event', { my: 'data' });
+            });*/
+            
+            var i=34;
+            setInterval(function(){
+                //  user_id, latitude, longitude, destination_latitude, destination_longitude, vehicle_type
+                // var data={'user_id':'1','latitude':'26.8611','longitude':'75.7953','destination_latitude':'26.8611','destination_longitude':'75.7953','user_name':'babulal','vehicle_type':'car'};
+
+                // var data={'user_id':'2','startlat':i+'.324','startlng':'23.213','user_name':'babulal','driver_id':'3'};
+                // i++;
+                // socket.emit('send_driver_location', data);
+            //  var data={'user_id':'13','order_id':'81','count':'5'};
+            //     socket.emit('find_driver', data);
+            //  }, 100000);
+            //  var data={'order_id':74,'driver_id':2};
+            //     socket.emit('newOrderAccept', data);
+            //  }, 10000);
+             var data={'order_id':81,'driver_id':1};
+                socket.emit('orderComplete', data);
+             }, 10000);
+           /* socket.on('news', function (data) {
+                var div = document.getElementById("news-list");
+                console.log("Rendering news : ",data);
+                for(var i = 0;i < data.length;i++){
+                    var newsItem = data[i];
+                    div.innerHTML += "<h3>" + newsItem.title + ' <small>'+ newsItem.date + "</small></h3><br>";
+                }
+                socket.emit('my other event', { my: 'data' });
+            });*/
+        </script>
+    </body>
+</html>
